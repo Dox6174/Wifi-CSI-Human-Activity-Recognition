@@ -1,0 +1,14 @@
+# ESP-IDF Build Artifacts
+build/
+sdkconfig.old
+
+# Python Artifacts
+__pycache__/
+*.pyc
+
+# Datasets and Large Files
+dataset/
+*.zip
+
+# Editor Configurations
+.vscode/
