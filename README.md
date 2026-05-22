@@ -1,7 +1,7 @@
 # Person-Independent WiFi CSI Activity Recognition for Passive Home Monitoring
 
 ## Overview
-This repository contains the hardware data collection pipeline and machine learning models for a device-free human activity recognition (HAR) system. The system utilizes a dual-ESP32 receiver setup and a commodity access point to capture Channel State Information (CSI). The core objective is to address the cross-person generalization failure common in CSI-based HAR by implementing a domain-adversarial neural network (DANN).
+This repository contains the hardware data collection pipeline and machine learning models for a device-free human activity recognition (HAR) system. The system utilizes a dual-ESP32 receiver setup and a commodity access point to capture Channel State Information (CSI). The core objective is to address the cross-person generalization failure common in CSI-based HAR by implementing a domain-adversarial neural network (DANN). The detailed methodology followed can be found in the [report](https://drive.google.com/file/d/1xO0nGM8au4A_aSCaNUEXmGrcFcXmbBun/view?usp=sharing).
 
 ## Hardware Configuration
 The sensing platform eliminates the need for intermediate edge devices or expensive network interface cards.
@@ -26,4 +26,10 @@ The project compares a standard CNN against a DANN to force the extraction of su
 ## Dataset and Results
 The dataset consists of 3,600 packets capturing five activities (walking, standing still, sitting still, arm gestures, and empty room) across two subjects.
 * **Baseline Performance:** Achieved 68.9% within-subject accuracy but dropped to an average of 53.1% cross-subject, confirming heavy reliance on subject-specific signatures.
-* **DANN Performance:** Raised the average cross-subject accuracy to 57.3% and the macro-F1 score from 43.2% to 56.9%. The domain classifier stabilized near chance level, confirming the successful suppression of subject identity by the
+* **DANN Performance:** Raised the average cross-subject accuracy to 57.3% and the macro-F1 score from 43.2% to 56.9%. The domain classifier stabilized near chance level, confirming the successful suppression of subject identity by the encoder.
+
+
+The dataset collected for the right angled configuration of the nodes can be found [here](https://drive.google.com/file/d/16fynwTDbXOkESI_oUNbUBjxJ3Fr87h_z/view?usp=sharing)
+
+## Future Work
+Subsequent iterations will focus on formally characterizing an adaptive dormancy protocol to manage the latency-overhead tradeoff. This three-state finite state machine leverages RSSI changes to trigger the sensing pipeline only when motion is likely, expediting the return to a low-power idle state.
